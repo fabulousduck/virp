@@ -18,16 +18,26 @@ This makes it possible to only have to import one file and haveaccess to all nam
 
 ## A short example
 
+**file A.php**
+
 ```php
   include "../virp/index.php";
   
   $app = virp::getInstance();
   
-  $myNamespace = $app::virpSpace("myNamespace");
+  $myNamespace = $app::makeVirpSpace("myNamespace");
   
   $myNamespace->defineAction(function doSomething($a) {
     printf("%s", a);
   });
+ ```
+
+**file B.php**
+
+```php
+  include "../virp/index.php";
+  
+  $myNamespace = virp::namespace("myNamespace");
   
   $myNamespace->doSomething("Hello, Virp!");
-```
+``
