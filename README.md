@@ -37,7 +37,7 @@ This makes it possible to only have to import one file and haveaccess to all nam
 ```php
   include "../virp/index.php";
   
-  $myNamespace = virp::namespace("myNamespace");
+  $myNamespace = virp::virpSpace("myNamespace");
   
   $myNamespace->doSomething("Hello, Virp!");
 ``
