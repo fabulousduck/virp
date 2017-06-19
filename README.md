@@ -12,14 +12,9 @@ and define functions on them
 You all know the hell of having to import a lot
 of files to use the functions in them.
 
-This is what Virp tries to eliviate by having you define
+This is what Virp tries to eliviate by having you define all functions on virpSpaces which Virp keeps track of internally.
 
-all functions on virpSpaces which Virp keeps track of internally.
-
-
-This makes it possible to only have to import one file and have
-
-access to all namespaces and functions in other files
+This makes it possible to only have to import one file and haveaccess to all namespaces and functions in other files
 
 ## A short example
 
