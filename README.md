@@ -8,6 +8,19 @@ I personally find the namespacing in php to be awefully lacking coming from node
 So this framework tries to eliviate that pain by being able to create namespaces
 and define functions on them
 
+## How does it help ?
+You all know the hell of having to import a lot
+of files to use the functions in them.
+
+This is what Virp tries to eliviate by having you define
+
+all functions on virpSpaces which Virp keeps track of internally.
+
+
+This makes it possible to only have to import one file and have
+
+access to all namespaces and functions in other files
+
 ## A short example
 
 ```php
