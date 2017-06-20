@@ -28,7 +28,7 @@ This makes it possible to only have to import one file and haveaccess to all nam
   $myNamespace = $app::makeVirpSpace("myNamespace");
   
   $myNamespace->defineAction(function doSomething($a) {
-    printf("%s", a);
+    printf("%s", $a);
   });
  ```
 
