@@ -3,7 +3,7 @@
 final class virp {
     public static $namespaces = [];
     private static $instActive = null;
-    public static function getInstance() {
+    public static function init() {
         if(self::$instActive === null) {
             self::$instActive = true;
             return new virp();
