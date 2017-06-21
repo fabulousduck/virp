@@ -2,16 +2,17 @@
 
 final class virp {
     public static $namespaces = [];
+    private static $instActive = null;
     public static function getInstance() {
-        $inst = null;
-        if($inst === null) {
-            $inst = new virp();
+        if(self::$instActive === null) {
+            self::$instActive = true;
+            return new virp();
         }
     }
 
     private function __construct() {}
 
-    public static function virpSpace($namespaceName) {
+    public static function virpspace($namespaceName) {
         if(!self::namespaceExists($namespaceName)) {
             $newNamespace = new virpSpace($namespaceName);
             array_push(self::$namespaces, $newNamespace);
@@ -39,11 +40,19 @@ final class virp {
     }
 }
 
-class virpSpace {
+class virpspace {
     public $functions = [];
     public $name;
 
     public function __construct($namespaceName) {
         $this->name = $namespaceName;
+    }
+
+    public function __call($name, $args) {
+        if (array_key_exists($name, $this->functions)) {
+            $this->functions[$name]($args);
+        } else {
+            $this->functions[$name] = $args[0];
+        }
     }
 }
