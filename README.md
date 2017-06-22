@@ -25,11 +25,11 @@ This makes it possible to only have to import one file and haveaccess to all nam
   
   $app = virp::getInstance();
   
-  $myNamespace = $app::makeVirpSpace("myNamespace");
+  $myNamespace = $app::virpspace("myNamespace");
   
-  $myNamespace->defineAction(function doSomething($a) {
-    printf("%s", $a);
-  });
+  $myNamespace->((function($a) {
+    printf("%s", $a[0]);
+  }));
  ```
 
 **file B.php**
@@ -37,7 +37,7 @@ This makes it possible to only have to import one file and haveaccess to all nam
 ```php
   include "../virp/index.php";
   
-  $myNamespace = virp::virpSpace("myNamespace");
+  $myNamespace = $app::virpspace("myNamespace");
   
   $myNamespace->doSomething("Hello, Virp!");
 ``
