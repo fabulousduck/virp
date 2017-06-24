@@ -1,8 +1,20 @@
 <?php
 
 final class virp {
+    /*  this array contains all namespaces defined
+        by keeping track of them here, the main instance
+        can distribute them across files
+    */
     public static $namespaces = [];
+    /*  keeps track of the current instance */
     private static $instActive = null;
+    /*  keeps track of the current db connection */
+    private static $conn = null;
+    /*
+        function for instantiating a new instance of virp
+        if an instance is already active, we wont allow another
+        as we adhere to the singleton principle
+    */
     public static function init() {
         if(self::$instActive === null) {
             self::$instActive = true;
@@ -11,7 +23,13 @@ final class virp {
     }
 
     private function __construct() {}
-
+    /*
+        function that returns a new namespace if the 
+        argument @namespaceName doen not exist in the
+        @namespaces array
+        If it does exist in the array, that namespace
+        will be returned
+    */
     public static function virpspace($namespaceName) {
         if(!self::namespaceExists($namespaceName)) {
             $newNamespace = new virpSpace($namespaceName);
@@ -20,6 +38,29 @@ final class virp {
         } else {
             return self::getNamespace($namespaceName);
         }
+    }
+
+    public static function connect($servername, $unameEnv, $pwdEnv, $db) {
+        if(self::$conn != null) {
+            return;
+        }
+        self::$conn = mysqli_connect($servername, $_SERVER[$unameEnv], $_SERVER[$pwdEnv], $db);
+        if(!self::$conn) {
+            die();
+        }
+    }
+
+    public static function exec($query) {
+        if(!self::$conn) {
+            return null;
+        }
+        $Qresult = mysqli_query(self::$conn, $query);
+
+        return $Qresult;
+    }
+
+    public static function closeConn() {
+
     }
 
     public static function namespaceExists($namespaceName) {
