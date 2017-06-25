@@ -8,8 +8,6 @@ final class virp {
     public static $namespaces = [];
     /*  keeps track of the current instance */
     private static $instActive = null;
-    /*  keeps track of the current db connection */
-    private static $conn = null;
     /*
         function for instantiating a new instance of virp
         if an instance is already active, we wont allow another
@@ -40,29 +38,6 @@ final class virp {
         }
     }
 
-    public static function connect($servername, $unameEnv, $pwdEnv, $db) {
-        if(self::$conn != null) {
-            return;
-        }
-        self::$conn = mysqli_connect($servername, $_SERVER[$unameEnv], $_SERVER[$pwdEnv], $db);
-        if(!self::$conn) {
-            die();
-        }
-    }
-
-    public static function exec($query) {
-        if(!self::$conn) {
-            return null;
-        }
-        $Qresult = mysqli_query(self::$conn, $query);
-
-        return $Qresult;
-    }
-
-    public static function closeConn() {
-
-    }
-
     public static function namespaceExists($namespaceName) {
         for($i = 0; $i < count(self::$namespaces); $i++) {
             if(self::$namespaces[$i]->name === $namespaceName) {
@@ -84,6 +59,8 @@ final class virp {
 class virpspace {
     public $functions = [];
     public $name;
+    /*  keeps track of the current db connection */
+    private static $conn = null;
 
     public function __construct($namespaceName) {
         $this->name = $namespaceName;
@@ -95,5 +72,28 @@ class virpspace {
         } else {
             $this->functions[$name] = $args[0];
         }
+    }
+
+    public static function connect($servername, $unameEnv, $pwdEnv, $db) {
+        if(self::$conn != null) {
+            return;
+        }
+        self::$conn = mysqli_connect($servername, $_SERVER[$unameEnv], $_SERVER[$pwdEnv], $db);
+        if(!self::$conn) {
+            die();
+        }
+    }
+
+    public static function exec($query) {
+        if(!self::$conn) {
+            return null;
+        }
+        $Qresult = mysqli_query(self::$conn, $query);
+
+        return $Qresult;
+    }
+
+    public static function closeConn(): bool {
+        return mysqli_close(self::$conn);
     }
 }
