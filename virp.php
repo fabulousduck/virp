@@ -66,10 +66,6 @@ class virpspace {
         $this->name = $namespaceName;
     }
 
-    public static function getName() {
-        return self::$name;
-    }
-
     public function __call($name, $args) {
         if (array_key_exists($name, $this->functions)) {
             $this->functions[$name]($args);
