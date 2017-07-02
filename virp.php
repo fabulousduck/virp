@@ -22,7 +22,7 @@ final class virp {
 
     private function __construct() {}
     /*
-        function that returns a new namespace if the 
+        function that returns a new namespace if the
         argument @namespaceName doen not exist in the
         @namespaces array
         If it does exist in the array, that namespace
@@ -64,6 +64,10 @@ class virpspace {
 
     public function __construct($namespaceName) {
         $this->name = $namespaceName;
+    }
+
+    public static function getName() {
+        return self::$name;
     }
 
     public function __call($name, $args) {

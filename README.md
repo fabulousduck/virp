@@ -3,18 +3,15 @@ A port of the js framework virgilio to php
 
 
 ## Why
-I personally find the namespacing in php to be awefully lacking coming from nodejs+virgilio.
-
-So this framework tries to eliviate that pain by being able to create namespaces
-and define functions on them
+In my view, PHP does not have a greate ecosystem for dealing with
+linear project scalability, and neither did JS.
+This framework aims to provide linear scalability for PHP projects.
 
 ## How does it help ?
-You all know the hell of having to import a lot
-of files to use the functions in them.
-
-This is what Virp tries to eliviate by having you define all functions on virpSpaces which Virp keeps track of internally.
-
-This makes it possible to only have to import one file and haveaccess to all namespaces and functions in other files
+The main goal of this framework is foremostly to prevent having to import
+a lot of different files to access their functionality.
+Virp tries to eliviate this  by having you define all functions on virpSpaces which Virp keeps track of internally.
+This makes it possible to only have to import one file and haveaccess to all namespaces and functions in other files.
 
 ## A short example
 
@@ -23,12 +20,12 @@ This makes it possible to only have to import one file and haveaccess to all nam
 ```php
   include "../virp/index.php";
   
-  $app = virp::getInstance();
+  $app = virp::init();
   
   $myNamespace = $app::virpspace("myNamespace");
   
-  $myNamespace->((function($a) {
-    printf("%s", $a[0]);
+  $myNamespace->doSomething((function($a) {
+    printf("%s%s", $a[0], $a[1]);
   }));
  ```
 
@@ -38,6 +35,25 @@ This makes it possible to only have to import one file and haveaccess to all nam
   include "../virp/index.php";
   
   $myNamespace = $app::virpspace("myNamespace");
-  
-  $myNamespace->doSomething("Hello, Virp!");
-``
+  $myNamespace->doSomething(["Hello, ", "Virp !"]);
+```
+
+## functions
+Virp contains relatively little functions, but it does not need many to be effective.
+In fact, the core of Virp is only about 100 lines long !
+
+### ```virp::init()```
+Inits a new instance of virp.
+
+The virp object is a singleton, this way one instance can govern your entire app.
+
+### ```virp::virpSpace(name:string)```
+Defines or calls a namespace with the name given.
+If a namespace with the given name does not exist, one will be made.
+
+ ## database
+
+ Virpspaces have inbuilt functions for dealing with databse connections.
+ It has these to enforce the principle of having namespaces only dealing with one database at the time.
+
+ ### ```virp::connect(servername:string, unameEnv:string, pwdEnv:string, db:string)```
