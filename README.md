@@ -3,15 +3,13 @@ A port of the js framework virgilio to php
 
 
 ## Why
-In my view, PHP does not have a greate ecosystem for dealing with
-linear project scalability, and neither did JS.
-This framework aims to provide linear scalability for PHP projects.
+I hate massive include lists
 
 ## How does it help ?
 The main goal of this framework is foremostly to prevent having to import
 a lot of different files to access their functionality.
 Virp tries to eliviate this  by having you define all functions on virpSpaces which Virp keeps track of internally.
-This makes it possible to only have to import one file and haveaccess to all namespaces and functions in other files.
+This makes it possible to only have to import one file and have access to all namespaces and functions in other files.
 
 ## A short example
 
