@@ -1,6 +1,8 @@
 # Virp
 A port of the js framework virgilio to php
 
+## Todo
+- [ ] argument spreading for functions defined on a namespace
 
 ## Why
 I hate massive include lists
@@ -55,3 +57,5 @@ If a namespace with the given name does not exist, one will be made.
  It has these to enforce the principle of having namespaces only dealing with one database at the time.
 
  ### ```virp::connect(servername:string, unameEnv:string, pwdEnv:string, db:string)```
+
+
