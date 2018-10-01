@@ -5,7 +5,7 @@ A port of the js framework virgilio to php
 - [ ] argument spreading for functions defined on a namespace
 
 ## Why
-I hate massive include lists
+We hate massive include lists
 
 ## How does it help ?
 The main goal of this framework is foremostly to prevent having to import
@@ -19,11 +19,11 @@ This makes it possible to only have to import one file and have access to all na
 
 ```php
   include "../virp/index.php";
-  
+
   $app = virp::init();
-  
+
   $myNamespace = $app::virpspace("myNamespace");
-  
+
   $myNamespace->doSomething((function($a) {
     printf("%s%s", $a[0], $a[1]);
   }));
@@ -33,7 +33,7 @@ This makes it possible to only have to import one file and have access to all na
 
 ```php
   include "../virp/index.php";
-  
+
   $myNamespace = $app::virpspace("myNamespace");
   $myNamespace->doSomething(["Hello, ", "Virp !"]);
 ```
@@ -57,5 +57,3 @@ If a namespace with the given name does not exist, one will be made.
  It has these to enforce the principle of having namespaces only dealing with one database at the time.
 
  ### ```virp::connect(servername:string, unameEnv:string, pwdEnv:string, db:string)```
-
-
